@@ -1,5 +1,5 @@
-import Genially from "../domain/Genially";
-import GeniallyRepository from "../domain/GeniallyRepository";
+import { Genially } from "../domain/Genially";
+import { GeniallyRepository } from "../domain/GeniallyRepository";
 
 type CreateGeniallyServiceRequest = {
   id: string;
@@ -7,8 +7,8 @@ type CreateGeniallyServiceRequest = {
   description: string;
 };
 
-export default class CreateGeniallyService {
-  constructor(private repository: GeniallyRepository) {}
+export class CreateGeniallyService {
+  constructor(private repository: GeniallyRepository) { }
 
   public async execute(req: CreateGeniallyServiceRequest): Promise<Genially> {
     const { id, name, description } = req;
