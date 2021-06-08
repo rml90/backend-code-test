@@ -1,0 +1,36 @@
+{
+  "services": {
+    "Core.Genially.GeniallyRepository": {
+      "class": "contexts/core/genially/infrastructure/MongoGeniallyRepository",
+      "arguments": [
+        "@Shared.ConnectionManager"
+      ]
+    },
+    "Core.Genially.FindGeniallyService": {
+      "class": "contexts/core/genially/application/FindGeniallyService",
+      "arguments": [
+        "@Core.Genially.GeniallyRepository"
+      ]
+    },
+    "Core.Genially.CreateGeniallyService": {
+      "class": "contexts/core/genially/application/CreateGeniallyService",
+      "arguments": [
+        "@Core.Genially.GeniallyRepository"
+      ]
+    },
+    "Core.Genially.DeleteGeniallyService": {
+      "class": "contexts/core/genially/application/DeleteGeniallyService",
+      "arguments": [
+        "@Core.Genially.GeniallyRepository",
+        "@Core.Genially.FindGeniallyService"
+      ]
+    },
+    "Core.Genially.RenameGeniallyService": {
+      "class": "contexts/core/genially/application/RenameGeniallyService",
+      "arguments": [
+        "@Core.Genially.GeniallyRepository",
+        "@Core.Genially.FindGeniallyService"
+      ]
+    }
+  }
+}

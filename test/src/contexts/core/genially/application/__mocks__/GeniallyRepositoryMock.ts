@@ -19,8 +19,8 @@ export class GeniallyRepositoryMock implements GeniallyRepository {
     const lastCallIndex = this.mockSave.mock.calls.length - 1;
     return this.mockSave.mock.calls[lastCallIndex][0];
   }
-
-  async find(id: string): Promise<Genially | null> {
+  
+  async find(id: string): Promise<Nullable<Genially>> {
     return this.mockFind(id);
   }
 

@@ -1,0 +1,26 @@
+{
+  "services": {
+    "Shared.MongoConfig": {
+      "factory": {
+        "class": "contexts/shared/infrastructure/mongo/MongoConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Shared.ConnectionManager": {
+      "factory": {
+        "class": "contexts/shared/infrastructure/mongo/MongoClientFactory",
+        "method": "createClient"
+      },
+      "arguments": [
+        "api",
+        "@Shared.MongoConfig"
+      ]
+    },
+    "Shared.EnvironmentArranger": {
+      "class": "contexts/shared/infrastructure/mongo/MongoEnvironmentArranger",
+      "arguments": [
+        "@Shared.ConnectionManager"
+      ]
+    }
+  }
+}

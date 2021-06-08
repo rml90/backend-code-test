@@ -1,0 +1,13 @@
+{
+  "imports": [
+    {
+      "resource": "./shared/application.json"
+    },
+    {
+      "resource": "./genially/application.json"
+    },
+    {
+      "resource": "./api/application.json"
+    }
+  ]
+}

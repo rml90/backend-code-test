@@ -3,8 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build-ts": "tsc",
-    "build": "npm run build-ts && npm run lint",
+    "build": "npm run build:clean && npm run build:tsc && npm run lint",
+    "build:clean": "rm -r dist; exit 0",
+    "build:tsc": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules --inspect=0.0.0.0:9267 ./src/api/server.ts",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "serve-debug": "nodemon --inspect dist/api/server.js",
@@ -19,12 +20,17 @@
   },
   "dependencies": {
     "@types/uuid": "^8.3.0",
+    "@types/convict": "^5.2.1",
+    "@types/mongodb": "^3.6.12",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
+    "convict": "^6.0.0",
     "express": "^4.17.1",
     "http-status": "^1.5.0",
     "lusca": "^1.6.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "mongodb": "^3.6.6",
+    "node-dependency-injection": "^2.6.11"
   },
   "devDependencies": {
     "@types/compression": "^1.7.0",

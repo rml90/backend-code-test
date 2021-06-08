@@ -1,7 +1,10 @@
 import request from "supertest";
-import { Given, Then } from "cucumber";
+import { Given, Then, Before, AfterAll } from "cucumber";
 import app from "../../../../src/api/app";
 import assert from "assert";
+
+import container from "../../../../src/api/config/dependency-injection/index";
+import { MongoEnvironmentArranger } from "../../../../src/contexts/shared/infrastructure/mongo/MongoEnvironmentArranger";
 
 let _request: request.Test;
 let _response: request.Response;
@@ -32,4 +35,14 @@ Then("the response should be empty", () => {
 
 Then("the response content should be:", response => {
   assert.deepStrictEqual(_response.body, JSON.parse(newLinesToSpaces(response)));
+});
+
+Before(async () => {
+  const environmentArranger: Promise<MongoEnvironmentArranger> = container.get("Shared.EnvironmentArranger");
+  await (await environmentArranger).arrange();
+});
+
+AfterAll(async () => {
+  const environmentArranger: Promise<MongoEnvironmentArranger> = container.get("Shared.EnvironmentArranger");
+  await (await environmentArranger).close();
 });

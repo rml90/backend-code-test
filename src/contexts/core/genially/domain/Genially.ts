@@ -1,7 +1,8 @@
+import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 import { GeniallyDescription } from "./GeniallyDescription";
 import { GeniallyName } from "./GeniallyName";
 
-export class Genially {
+export class Genially extends AggregateRoot {
   private _id: string;
   private _name: GeniallyName;
   private _description: GeniallyDescription;
@@ -10,14 +11,14 @@ export class Genially {
   private _deletedAt: Date;
 
   constructor(id: string, name: string, description?: string) {
+    super();
     this._id = id;
     this._name = new GeniallyName(name);
     this._description = new GeniallyDescription(description);
     this._createdAt = new Date();
   }
 
-  static fromPrimitives(plainData: {id: string; name: string; description?: string; createdAt?: string; modifiedAt?: string; deletedAt?: string}): Genially
-  {
+  static fromPrimitives(plainData: { id: string; name: string; description?: string; createdAt?: string; modifiedAt?: string; deletedAt?: string }): Genially {
     const genially = new Genially(
       plainData.id,
       plainData.name,
@@ -73,5 +74,5 @@ export class Genially {
       modifiedAt: this._modifiedAt,
       deletedAt: this._deletedAt,
     };
-  }  
+  }
 }

@@ -1,0 +1,22 @@
+{
+  "services": {
+    "Api.Controller.CreateGeniallyController": {
+      "class": "api/controllers/CreateGeniallyController",
+      "arguments": [
+        "@Core.Genially.CreateGeniallyService"
+      ]
+    },
+    "Api.Controller.DeleteGeniallyController": {
+      "class": "api/controllers/DeleteGeniallyController",
+      "arguments": [
+        "@Core.Genially.DeleteGeniallyService"
+      ]
+    },
+    "Api.Controller.RenameGeniallyController": {
+      "class": "api/controllers/RenameGeniallyController",
+      "arguments": [
+        "@Core.Genially.RenameGeniallyService"
+      ]
+    }
+  }
+}
