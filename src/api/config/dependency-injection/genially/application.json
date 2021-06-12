@@ -15,7 +15,8 @@
     "Core.Genially.CreateGeniallyService": {
       "class": "contexts/core/genially/application/CreateGeniallyService",
       "arguments": [
-        "@Core.Genially.GeniallyRepository"
+        "@Core.Genially.GeniallyRepository",
+        "@Shared.EventBus"
       ]
     },
     "Core.Genially.DeleteGeniallyService": {

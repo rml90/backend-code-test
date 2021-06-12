@@ -1,3 +1,4 @@
+import { GeniallyCreatedDomainEvent } from "./../../../../../../src/contexts/core/genially/domain/GeniallyCreatedDomainEvent";
 import { CreateGeniallyService } from "../../../../../../src/contexts/core/genially/application/CreateGeniallyService";
 import { Genially } from "../../../../../../src/contexts/core/genially/domain/Genially";
 import { GeniallyNameEmpty } from "../../../../../../src/contexts/core/genially/domain/GeniallyNameEmpty";
@@ -5,6 +6,7 @@ import { GeniallyNameLengthInvalid } from "../../../../../../src/contexts/core/g
 import { GeniallyDescriptionTooLong } from "../../../../../../src/contexts/core/genially/domain/GeniallyDescriptionTooLong";
 import { GeniallyRepositoryMock } from "./__mocks__/GeniallyRepositoryMock";
 import MockDate from "mockdate";
+import { EventBusMock } from "./__mocks__/EventBusMock";
 
 beforeAll(() => {
   // it makes sure the date stays fixed to the ms 
@@ -23,7 +25,8 @@ describe("Create Genially", () => {
     description: "Description of my first genially"
   };
   const repository = new GeniallyRepositoryMock();
-  const service = new CreateGeniallyService(repository);
+  const eventBus = new EventBusMock();
+  const service = new CreateGeniallyService(repository, eventBus);
 
   it("should create a genially", async () => {
     await service.execute(request);
@@ -33,6 +36,7 @@ describe("Create Genially", () => {
       request.name,
       request.description
     ));
+    eventBus.assertLastPublishedEventIs(new GeniallyCreatedDomainEvent(request.id));
   });
 
   it("the name of the genially cannot be empty", async () => {

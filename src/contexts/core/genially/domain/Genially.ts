@@ -1,6 +1,7 @@
 import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 import { GeniallyDescription } from "./GeniallyDescription";
 import { GeniallyName } from "./GeniallyName";
+import { GeniallyCreatedDomainEvent } from "./GeniallyCreatedDomainEvent";
 
 export class Genially extends AggregateRoot {
   private _id: string;
@@ -16,6 +17,16 @@ export class Genially extends AggregateRoot {
     this._name = new GeniallyName(name);
     this._description = new GeniallyDescription(description);
     this._createdAt = new Date();
+  }
+
+  static create(id: string, name: string, description?: string) {
+    const genially = new Genially(
+      id, name, description
+    );
+
+    genially.record(new GeniallyCreatedDomainEvent(id));
+
+    return genially;
   }
 
   static fromPrimitives(plainData: { id: string; name: string; description?: string; createdAt?: string; modifiedAt?: string; deletedAt?: string }): Genially {

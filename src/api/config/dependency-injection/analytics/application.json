@@ -1,0 +1,27 @@
+{
+  "services": {
+    "Core.Analytics.GeniallyCounterRepository": {
+      "class": "contexts/core/analytics/infrastructure/MongoGeniallyCounterRepository",
+      "arguments": [
+        "@Shared.ConnectionManager"
+      ]
+    },
+    "Core.Analytics.IncrementGeniallyCounter": {
+      "class": "contexts/core/analytics/application/IncrementGeniallyCounterService",
+      "arguments": [
+        "@Core.Analytics.GeniallyCounterRepository"
+      ]
+    },
+    "Core.Analytics.IncrementGeniallyCounterOnGeniallyCreated": {
+      "class": "contexts/core/analytics/application/IncrementGeniallyCounterOnGeniallyCreated",
+      "arguments": [
+        "@Core.Analytics.IncrementGeniallyCounter"
+      ],
+      "tags": [
+        {
+          "name": "domainEventSubscriber"
+        }
+      ]
+    }
+  }
+}

@@ -2,6 +2,7 @@ import compression from "compression";
 import express from "express";
 import lusca from "lusca";
 import { registerRoutes } from "./routes";
+import { registerSubscribers } from "./subscribers";
 
 // Create Express server
 const app = express();
@@ -16,5 +17,6 @@ app.use(lusca.xssProtection(true));
 
 // Primary app routes
 registerRoutes(app);
+registerSubscribers();
 
 export default app;

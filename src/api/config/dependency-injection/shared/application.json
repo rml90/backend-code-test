@@ -1,5 +1,8 @@
 {
   "services": {
+    "Shared.EventBus": {
+      "class": "contexts/shared/infrastructure/InMemorySyncEventBus"
+    },
     "Shared.MongoConfig": {
       "factory": {
         "class": "contexts/shared/infrastructure/mongo/MongoConfigFactory",

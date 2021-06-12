@@ -7,6 +7,9 @@
       "resource": "./genially/application.json"
     },
     {
+      "resource": "./analytics/application.json"
+    },
+    {
       "resource": "./api/application.json"
     }
   ]
