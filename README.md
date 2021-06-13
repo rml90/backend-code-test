@@ -95,3 +95,68 @@ If you have any questions about the test, you can contact any of us:
 - Francisco (francisco@genial.ly)
 
 Good Luck!
+
+***
+# Changes in test code
+
+## Project structure
+
+The table below shows the new files and folders added to the project.
+
+|Name  |Description  |
+|---------|---------|
+|**src/api/config/dependency-injection**| it contains the configuration files of the dependency injection container
+|**src/api/config**/config.js| source code responsible for loading the configuration file to run the express api (according to the execution environment).
+|**src/api/config**/{default\|dev\|production\|test}.json| configuration files for each execution environment. Each file contains the URL of MongoDB connection. 
+|**src/contexts/core/analytics**| new module of core context
+|**src/contexts/shared**| shared context
+|cucumber.js| configuration to execute acceptance tests with cucumber
+|**test/src**|folder containing unit and acceptance tests
+|**test/src/api**|acceptance tests for the api using cucumber
+|**test/src/contexts**|unit tests for the different modules of the core bounded context. It's organized in the different layers (application, domain and infrastructure)
+
+
+## NPM Packages installed
+
+|Name       |Description|
+|-----------|-----------|
+|cucumber|it allows to run automated tests written in plain language. it is used to write acceptance tests|
+|supertest|it provides a high-level abstraction for testing HTTP. it is used with cucumber to test the api
+|http-status|it provides a list of http codes that is used in the api responses
+|convict|it helps with the configuration of the api
+|mongodb|official MongoDB driver for Nodejs
+|node-dependency-injection|dependecy injection container
+|Mockdate|it allows to mock the Date object. It's used to make sure that a date stays fixed to the ms. So, it can be tested that dates of creation, modification and deletion are set properly in the different use cases
+|uuid|it allows to create random uuids. it is used in the tests
+
+## Assumptions
+
+- A genially marked as deleted is the same as a non existing genially. So, a GeniallyNotExist error is thrown if a deleted genially try to be renamed or deleted.
+- I suppose this api will have a lot of traffic and every second counts if you manage 100M requests per day. So, I decided to use MongoDB driver rather than Mongoose.
+
+## Improvements
+
+- Test that the counter of created geniallys is incremented when an event GeniallyCreatedDomainEvent is received.
+- Create an endpoint for getting the number of created geniallys.
+- Create a workflow in github actions to run tests.
+
+## How to start project
+
+1. Install mongodb if not install yet.
+1. Install dependencies: `npm install`
+1. Start server
+    1. Production mode:
+        - `npm run build`
+        - `npm run start`
+    1. Development mode:
+        - `npm run dev`: it detects changes in ts and json files (dependency injection files) and restarts the server automatically.
+  
+## Tests execution
+
+|Command|Description|
+|-------|-----------|
+|`npm run test`| run unit and acceptance tests
+|`npm run test:unit`| run unit tests
+|`npm run test:features`| run acceptance tests of express api
+
+
